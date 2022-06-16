@@ -1,0 +1,8 @@
+spring:
+ application:
+  name: management-service
+
+ r2dbc:
+  url: r2dbc:h2:mem:///test-reactive-db
+  user: sa
+  password:
