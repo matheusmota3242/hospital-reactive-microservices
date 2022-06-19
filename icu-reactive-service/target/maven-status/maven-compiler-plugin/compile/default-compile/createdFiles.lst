@@ -1,4 +1,3 @@
-br/ufrn/imd/mmgg/config/R2dbcConfig.class
 br/ufrn/imd/mmgg/repository/IntermentRepository.class
 br/ufrn/imd/mmgg/model/ICUInterment.class
 br/ufrn/imd/mmgg/service/InternmentService.class

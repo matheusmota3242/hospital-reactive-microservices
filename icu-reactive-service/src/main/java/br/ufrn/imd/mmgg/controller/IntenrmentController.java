@@ -1,7 +1,10 @@
 package br.ufrn.imd.mmgg.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ufrn.imd.mmgg.model.ICUInterment;
@@ -15,7 +18,7 @@ public class IntenrmentController {
     private InternmentService service;
 
     @PostMapping
-    public Mono<ICUInterment> save(Mono<ICUInterment> interment) throws Exception {
+    public Mono<ICUInterment> save(@Valid @RequestBody Mono<ICUInterment> interment) throws Exception {
         return service.save(interment);
     }
 }

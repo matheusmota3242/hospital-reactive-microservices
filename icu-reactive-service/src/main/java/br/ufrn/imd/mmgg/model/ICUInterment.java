@@ -1,15 +1,18 @@
 package br.ufrn.imd.mmgg.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotNull;
 
-import org.core.reactive.model.Internment;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("icu_internment")
-public class ICUInterment {
+@Table(value = "icu_internment")
+public class ICUInterment implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
     @Column("id")
 	private Integer id;
 	
@@ -18,7 +21,7 @@ public class ICUInterment {
 	private Integer patientId;
 	
 	@Column("date_time")
-	private LocalDateTime dateTime;
+	private LocalDateTime dateTime = LocalDateTime.now();
 	
 	@Column("status")
 	private boolean status;

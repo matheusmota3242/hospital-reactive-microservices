@@ -2,6 +2,7 @@ package org.reactive.management.service.controller;
 
 import javax.validation.Valid;
 
+import org.core.reactive.model.dto.TransferDTO;
 import org.reactive.management.service.model.Patient;
 import org.reactive.management.service.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,11 @@ public class PatientController {
 	@GetMapping
 	public Flux<Patient> getAll() {
 		return service.getAll();
+	}
+
+	@PostMapping("transfer")
+	public Mono<Patient> transfer(@Valid @RequestBody Mono<TransferDTO> transfer) {
+		
+		return service.transfer(transfer);
 	}
 }

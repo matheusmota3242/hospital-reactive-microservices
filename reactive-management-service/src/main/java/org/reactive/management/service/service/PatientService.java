@@ -34,25 +34,42 @@ public class PatientService {
 		return repository.findAll();
 	}
 
-	public void transfer(TransferDTO transfer) {
-		repository.findById(transfer.getPatientId()).handle((patient, sink) -> {
-			if (patient == null) {
-				sink.error(new Exception());
-			} else {
-				try {
-					callHospitalService(transfer, "");
-				} catch (TransferException e) {
-					sink.error(new Exception());
-				}
+	public Mono<Patient> transfer(Mono<TransferDTO> transfer) {
+		Mono<Patient> patient = transfer.flatMap(mapper -> repository.findById(mapper.getPatientId()).switchIfEmpty(Mono.just(new Patient())));
+
+		patient.subscribe(next -> {
+			try {
+				callHospitalService(next.getId(), "http://management-service");
+			} catch (TransferException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		});
+		return patient;
+		
+		// return transfer.map(mapper -> repository.findById(mapper.getPatientId()).switchIfEmpty(null))
+		// .handle((patient, sink) -> {
+		// 	if (patient == null) {
+		// 		sink.error(new Exception());
+		// 	} else {
+		// 			patient.doOnNext(mapper -> {
+		// 				try {
+		// 					callHospitalService(mapper.getId(), "");
+		// 				} catch (TransferException e) {
+		// 					// TODO Auto-generated catch block
+		// 					e.printStackTrace();
+		// 				}
+		// 			});
+			
+		// 	}
+		// });
 		
 
 	}
 
-	private void callHospitalService(TransferDTO transfer, String url) throws TransferException {
+	private void callHospitalService(Integer patientId, String url) throws TransferException {
 		Map<String, Integer> map = new HashMap<>();
-		map.put("patientId", transfer.getPatientId());
+		map.put("patientId", patientId);
 		ResponseEntity<String> response;
 		try {
 			response = restTemplate.postForEntity(url, map, String.class);

@@ -8,5 +8,5 @@ import reactor.core.publisher.Mono;
 
 @Repository
 public interface IntermentRepository extends R2dbcRepository<ICUInterment, Integer> {
-    
+ 
 }
