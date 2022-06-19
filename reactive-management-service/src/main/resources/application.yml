@@ -1,0 +1,21 @@
+spring:
+ application:
+  name: management-service
+
+ r2dbc:
+  url: r2dbc:postgresql://localhost:5432/hospital_reactive_db
+  username: postgres
+  password: postgres
+
+ liquibase:
+  enabled: false
+  url: jdbc:postgresql://localhost:5432/hospital_reactive_db
+  user: postgres
+  password: postgres
+
+eureka:
+ client:
+  service-url: 
+   default-zone: http://localhost:8761/eureka
+  fetch-registry: true
+  register-with-eureka: true

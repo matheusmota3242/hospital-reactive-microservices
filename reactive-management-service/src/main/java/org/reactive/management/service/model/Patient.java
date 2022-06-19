@@ -1,8 +1,6 @@
 package org.reactive.management.service.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,8 +9,6 @@ import javax.validation.constraints.Pattern;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
-
-import net.lecousin.reactive.data.relational.annotations.ForeignTable;
 
 @Table(value = "patient")
 public class Patient implements Serializable {
@@ -25,23 +21,25 @@ public class Patient implements Serializable {
 	@Id
 	private Integer id;
 
+	@Column("first_name")
 	@NotBlank(message = "The 'firstName' field is mandatory.")
 	private String firstName;
 
+	@Column("last_name")
 	@NotBlank(message = "The 'lastName' field is mandatory.")
 	private String lastName;
 
+	@Column("patient_age")
 	@NotNull(message = "The 'firstName' field is mandatory.")
 	private Integer age;
 
-	@Column
+	@Column("cpf")
 	@Pattern(regexp = "([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})", message = "Invalid CPF!")
 	private String cpf;
 
+	@Column("patient_condition")
 	private String condition;
 	
-	@ForeignTable(joinKey = "patient")
-	private List<ActionRecord> records = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -90,13 +88,5 @@ public class Patient implements Serializable {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
-	public List<ActionRecord> getRecords() {
-		return records;
-	}
-
-	public void setRecords(List<ActionRecord> records) {
-		this.records = records;
-	}	
 
 }
