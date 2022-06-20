@@ -18,7 +18,7 @@ public class IntenrmentController {
     private InternmentService service;
 
     @PostMapping
-    public Mono<ICUInterment> save(@Valid @RequestBody Mono<ICUInterment> interment) throws Exception {
-        return service.save(interment);
+    public Mono<ICUInterment> save(@Valid @RequestBody Mono<ICUInterment> internment) throws Exception {
+        return service.save(internment);
     }
 }

@@ -1,5 +1,6 @@
+br/ufrn/imd/mmgg/config/WebClientConfig.class
+br/ufrn/imd/mmgg/controller/IntenrmentController.class
 br/ufrn/imd/mmgg/repository/IntermentRepository.class
 br/ufrn/imd/mmgg/model/ICUInterment.class
 br/ufrn/imd/mmgg/service/InternmentService.class
 br/ufrn/imd/mmgg/ICUReactiveServiceApplication.class
-br/ufrn/imd/mmgg/controller/IntenrmentController.class

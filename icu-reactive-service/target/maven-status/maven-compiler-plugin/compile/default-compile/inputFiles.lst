@@ -1,4 +1,5 @@
 /media/matheus-mota/SSD-480/Workspaces/BTI/hospital-reactive-microservices/icu-reactive-service/src/main/java/br/ufrn/imd/mmgg/service/InternmentService.java
+/media/matheus-mota/SSD-480/Workspaces/BTI/hospital-reactive-microservices/icu-reactive-service/src/main/java/br/ufrn/imd/mmgg/config/WebClientConfig.java
 /media/matheus-mota/SSD-480/Workspaces/BTI/hospital-reactive-microservices/icu-reactive-service/src/main/java/br/ufrn/imd/mmgg/model/ICUInterment.java
 /media/matheus-mota/SSD-480/Workspaces/BTI/hospital-reactive-microservices/icu-reactive-service/src/main/java/br/ufrn/imd/mmgg/controller/IntenrmentController.java
 /media/matheus-mota/SSD-480/Workspaces/BTI/hospital-reactive-microservices/icu-reactive-service/src/main/java/br/ufrn/imd/mmgg/repository/IntermentRepository.java
