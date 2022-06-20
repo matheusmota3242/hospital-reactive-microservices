@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.server.ResponseStatusException;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -48,7 +49,7 @@ public class PatientService {
 
 	// TODO pensar em solução para obter a url dinamicamente
 	public Mono<Patient> transfer(Mono<TransferDTO> transfer) {
-		Mono<Patient> patient = transfer.flatMap(transferMapping -> repository.findById(transferMapping.getPatientId()).switchIfEmpty(Mono.error(new 	IllegalStateException("Paciente não existe.")))).map(mapper -> {
+		Mono<Patient> patient = transfer.flatMap(transferMapping -> repository.findById(transferMapping.getPatientId()).switchIfEmpty(Mono.error(new 	ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não cadastrado.")))).map(mapper -> {
 			builder.baseUrl(ICU_URL)
 				.build()
 				.post()
