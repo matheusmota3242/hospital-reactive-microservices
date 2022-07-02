@@ -47,20 +47,19 @@ public class PatientService {
 		return repository.findAll();
 	}
 
-	// TODO pensar em solução para obter a url dinamicamente
-	public Mono<Patient> transfer(Mono<TransferDTO> transfer) {
-		Mono<Patient> patient = transfer.flatMap(transferMapping -> repository.findById(transferMapping.getPatientId()).switchIfEmpty(Mono.error(new 	ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não cadastrado.")))).map(mapper -> {
-			builder.baseUrl(ICU_URL)
+	public Mono<Patient> transfer(Mono<TransferDTO> transfer, String destinationService) {
+		
+		return transfer.flatMap(transferMapping -> repository.findById(transferMapping.getPatientId()).switchIfEmpty(Mono.error(new 	ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não cadastrado.")))).doOnNext(mapper -> {
+			builder.baseUrl("http://".concat(destinationService))
 				.build()
 				.post()
 				.body(getBodyRequest(mapper.getId()), Map.class)
 				.retrieve()
 				.bodyToMono(Object.class)
+				.onErrorReturn(Mono.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao chamar serviço.")))
 				.subscribe();
-			return mapper;
-		});
 
-		return patient;
+		});
 
 	}
 

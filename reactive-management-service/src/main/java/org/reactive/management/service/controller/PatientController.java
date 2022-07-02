@@ -8,6 +8,7 @@ import org.reactive.management.service.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,9 +36,9 @@ public class PatientController {
 		return service.getAll();
 	}
 
-	@PostMapping("transfer")
-	public Mono<Patient> transfer(@Valid @RequestBody Mono<TransferDTO> transfer) {
+	@PostMapping("transfer/{destinationService}")
+	public Mono<Patient> transfer(@Valid @RequestBody Mono<TransferDTO> transfer, @PathVariable String destinationService) {
 		
-		return service.transfer(transfer);
+		return service.transfer(transfer, destinationService);
 	}
 }
