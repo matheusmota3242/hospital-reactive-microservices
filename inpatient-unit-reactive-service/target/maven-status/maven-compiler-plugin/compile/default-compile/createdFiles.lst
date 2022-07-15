@@ -1,0 +1,7 @@
+br/ufrn/imd/mmgg/config/WebClientConfig.class
+br/ufrn/imd/mmgg/repository/InternmentRepository.class
+br/ufrn/imd/mmgg/InpatientUnitReactiveService.class
+br/ufrn/imd/mmgg/controller/InternmentController.class
+br/ufrn/imd/mmgg/model/Internment.class
+br/ufrn/imd/mmgg/service/InternmentService.class
+br/ufrn/imd/mmgg/App.class

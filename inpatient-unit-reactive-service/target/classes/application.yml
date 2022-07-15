@@ -1,0 +1,27 @@
+spring:
+ application:
+  name: inpatient-unit-reactive-service
+
+ r2dbc:
+  url: r2dbc:postgresql://localhost:5432/inpatient_unit_reactive_db 
+  username: postgres
+  password: postgres
+  pool: 
+   initial-size: 100
+   max-size: 500
+  
+ liquibase:
+  enabled: false
+  url: jdbc:postgresql://localhost:5432/inpatient_unit_reactive_db
+  user: postgres
+  password: postgres
+
+eureka:
+ client: 
+  service-url:
+   default-zone: http://localhost:8761/eureka
+  fetch-registry: true
+  register-with-eureka: true
+
+server:
+ port: 8082
