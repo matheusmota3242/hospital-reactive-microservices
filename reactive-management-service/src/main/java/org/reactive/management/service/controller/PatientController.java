@@ -37,7 +37,7 @@ public class PatientController {
 	}
 
 	@PostMapping("transfer/{destinationService}")
-	public Mono<Patient> transfer(@Valid @RequestBody Mono<TransferDTO> transfer, @PathVariable String destinationService) {
+	public Mono<Object> transfer(@Valid @RequestBody Mono<TransferDTO> transfer, @PathVariable String destinationService) {
 		
 		return service.transfer(transfer, destinationService);
 	}

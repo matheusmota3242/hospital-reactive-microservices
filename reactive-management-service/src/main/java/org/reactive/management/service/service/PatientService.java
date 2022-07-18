@@ -3,22 +3,14 @@ package org.reactive.management.service.service;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-import org.bouncycastle.crypto.Mac;
-import org.core.reactive.enuns.TypeAction;
 import org.core.reactive.model.dto.TransferDTO;
-import org.reactive.management.service.exception.TransferException;
 import org.reactive.management.service.model.Patient;
 import org.reactive.management.service.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.BodyInserter;
-import org.springframework.web.reactive.function.BodyInserters;
+
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,11 +26,6 @@ public class PatientService {
 	@Autowired
 	WebClient.Builder builder;
 
-	private static final String ICU_URL = "http://icu-reactive-service";
-	private static final String INPATIENT_URL = "http://inpatient-unit-reactive-service";
-
-
-	
 	public Mono<Patient> save(Mono<Patient> patient) {
 		return repository.saveAll(patient).next();
 	}
@@ -47,19 +34,21 @@ public class PatientService {
 		return repository.findAll();
 	}
 
-	public Mono<Patient> transfer(Mono<TransferDTO> transfer, String destinationService) {
+	public Mono<Object> transfer(Mono<TransferDTO> transfer, String destinationService) {
 		
-		return transfer.flatMap(transferMapping -> repository.findById(transferMapping.getPatientId()).switchIfEmpty(Mono.error(new 	ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não cadastrado.")))).doOnNext(mapper -> {
-			builder.baseUrl("http://".concat(destinationService))
+		return transfer.flatMap(transferMapping -> repository.findById(transferMapping.getPatientId()).switchIfEmpty(Mono.error(new 	ResponseStatusException(HttpStatus.NOT_FOUND, "Paciente não cadastrado.")))).flatMap(mapper -> 
+			builder.baseUrl("http://".concat(destinationService).concat("/icu"))
 				.build()
 				.post()
 				.body(getBodyRequest(mapper.getId()), Map.class)
-				.retrieve()
-				.bodyToMono(Object.class)
-				.onErrorReturn(Mono.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Erro ao chamar serviço.")))
-				.subscribe();
+				.exchangeToMono(response -> {
+					if (response.statusCode().isError()) {
+						return Mono.error(new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, String.format("Não foi possível chamar o serviço %s", destinationService)));
+					}
+					return response.bodyToMono(Object.class);
+				})
 
-		});
+		);
 
 	}
 
@@ -70,14 +59,5 @@ public class PatientService {
 		});
 	}
 
-	// private String getUrl(TypeAction typeAction) {
-	// 	String url = StringUtils.EMPTY;
-	// 	if (TypeAction.TO_ICU.equals(typeAction)) {
-	// 		url = ICU_URL;
-	// 	} else if (TypeAction.TO_INPATIENT_UNIT.equals(typeAction)) {
-	// 		url = INPATIENT_URL;
-	// 	}
-	// 	return url;
-	// }
 
 }
