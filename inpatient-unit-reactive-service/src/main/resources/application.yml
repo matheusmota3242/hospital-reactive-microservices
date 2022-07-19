@@ -16,6 +16,9 @@ spring:
   user: postgres
   password: postgres
 
+ config:
+  import: configserver:http://localhost:8888
+
 eureka:
  client: 
   service-url:

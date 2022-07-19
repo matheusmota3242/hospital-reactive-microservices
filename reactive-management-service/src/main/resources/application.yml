@@ -13,8 +13,13 @@ spring:
   user: postgres
   password: postgres
 
+ config:
+  import: configserver:http://localhost:8888
+
 server:
  port: 8081
+
+ 
 
 eureka:
  client:
