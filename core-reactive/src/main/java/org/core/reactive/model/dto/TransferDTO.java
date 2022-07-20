@@ -1,17 +1,11 @@
 package org.core.reactive.model.dto;
 
-import java.io.Serializable;
-
 import javax.validation.constraints.NotNull;
 
 import org.core.reactive.enuns.TypeAction;
 
-public class TransferDTO implements Serializable {
+public class TransferDTO {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	@NotNull(message = "The field 'idPatient' is mandatory.")
 	private Integer patientId;

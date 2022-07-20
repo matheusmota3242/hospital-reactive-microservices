@@ -36,9 +36,9 @@ public class PatientController {
 		return service.getAll();
 	}
 
-	@PostMapping("transfer/{destinationService}")
-	public Mono<Object> transfer(@Valid @RequestBody Mono<TransferDTO> transfer, @PathVariable String destinationService) {
+	// @PostMapping("transfer/{destinationService}")
+	// public Mono<Object> transfer(@Valid @RequestBody Mono<TransferDTO> transfer, @PathVariable String destinationService) {
 		
-		return service.transfer(transfer, destinationService);
-	}
+	// 	return service.transfer(transfer, destinationService);
+	// }
 }

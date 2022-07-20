@@ -16,14 +16,26 @@ spring:
  config:
   import: configserver:http://localhost:8888
 
+ rabbitmq:
+  host: localhost
+  port: 5672
+  username: admin
+  password: admin
+  connection-timeout: 5s
+ 
+ cloud:
+  function:
+   definition: transfer;getall
+  stream:
+   bindings:
+    transfer-in-0:
+     destination: transfer-in
+    transfer-out-0:
+     destination: transfer-out
+    getall-out-0:
+     destination: getall-out
+  
+            
+
 server:
  port: 8081
-
- 
-
-eureka:
- client:
-  service-url: 
-   default-zone: http://localhost:8761/eureka
-  fetch-registry: true
-  register-with-eureka: true
