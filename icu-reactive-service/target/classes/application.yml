@@ -16,6 +16,14 @@ spring:
  config:
   import: configserver:http://localhost:8888
 
+ cloud:
+  function:
+   definition: save
+  stream:
+   bindings:
+    save-in-0:
+     destination: transfer-out
+
 # eureka:
 #  client: 
 #   service-url:
