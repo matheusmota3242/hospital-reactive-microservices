@@ -1,7 +1,5 @@
 # Hospital Reactive Microservices
 
-![Hospital](https://www.example.com/hospital-image.jpg)
-
 Welcome to the Hospital Reactive Microservices project. This project is a collection of microservices that form a reactive system for managing hospital operations. It is designed to be a scalable and responsive solution for healthcare facilities.
 
 ## Project Structure
