@@ -1,6 +1,6 @@
 # Hospital Reactive Microservices
 
-Welcome to the Hospital Reactive Microservices project. This project is a collection of microservices that form a reactive system for managing hospital operations. It is designed to be a scalable and responsive solution for healthcare facilities.
+Welcome to the Hospital Reactive Microservices project. This project is a collection of microservices developed with **Spring WebFlux** that form a reactive system for managing hospital operations. It is designed to be a scalable and responsive solution for healthcare facilities.
 
 ## Project Structure
 
@@ -23,6 +23,16 @@ The project is organized into several modules, each responsible for specific fun
 
 ## Dependencies
 
+- **Spring Boot WebFlux Starter**
+- **Spring Data R2DBC**
+- **R2DBC PostgreSQL**
+- **PostgreSQL JDBC Driver**
+- **Spring Boot JDBC Starter**
+- **Liquibase Core**
+- **Spring Cloud Netflix Eureka Client**
+- **Spring Cloud Config Starter**
+- **Core Reactive**
+- **JUnit**
 
 ## Getting Started
 
