@@ -19,6 +19,10 @@ The project is organized into several modules, each responsible for specific fun
 - **Spring Boot**: The microservices are built using Spring Boot, a popular Java framework for building microservices.
 - **Reactive Programming**: The system is designed to be reactive, making use of reactive programming principles for responsiveness and scalability.
 - **Spring Cloud**: Spring Cloud is used for service discovery, configuration management, and other cloud-related functions.
+- **RabbitMQ**
+
+## Dependencies
+
 
 ## Getting Started
 
